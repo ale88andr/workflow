@@ -6,23 +6,33 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6171nkopa-!vda73kvz74o2phb*1cc^6=v9*-^1-k6ht-_uidj'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
+DEBUG = True
 
-# Application definition
+# Внешние библиотеки
+EXTERNAL_APPS = [
 
-INSTALLED_APPS = (
+]
+
+# Приложения
+PROJECT_APPS = [
+    'foundation',
+    'documents',
+]
+
+# Django applications
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'documents',
-)
+]
+
+# Application definition
+INSTALLED_APPS = EXTERNAL_APPS + PROJECT_APPS + DJANGO_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -40,7 +50,7 @@ ROOT_URLCONF = 'workflow.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, '../../templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -63,17 +73,21 @@ WSGI_APPLICATION = 'workflow.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
     }
 }
+
+LOGIN_URL = r"/login/"
+
+AUTH_USER_MODEL = 'foundation.Employee'
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe\Simferopol'
 
 USE_I18N = True
 
@@ -86,6 +100,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-)
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '../../assets'),
+]

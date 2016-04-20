@@ -1,5 +1,5 @@
+from documents.models import Incoming, Outbound, Resolution
 from django.contrib import admin
-from documents.models import Document
 
 
-admin.site.register(Document)
+admin.site.register([Incoming, Outbound, Resolution])
