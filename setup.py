@@ -7,7 +7,7 @@ setup(
               'foundation.migrations'],
     url='',
     license='',
-    author='tol',
+    author='Alexandr Nekrasov',
     author_email='ale88andr@gmail.com',
     description='Workflow service'
 )
