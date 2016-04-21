@@ -1,7 +1,7 @@
 from django.db import models
 
-from foundation import Organisation, Department
-from workflow import settings
+from foundation.models import Organisation, Department
+from workflow.settings import base
 
 
 class Resolution(models.Model):
@@ -47,7 +47,7 @@ class DocumentModel(models.Model):
     register_at = models.DateField('Дата регистрации')
 
     # document reporter
-    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Исполнитель')
+    reporter = models.ForeignKey(base.AUTH_USER_MODEL, verbose_name='Исполнитель')
 
     # department of document reporter
     reporter_department = models.ForeignKey(Department, verbose_name='Отдел')
@@ -80,7 +80,7 @@ class Outbound(DocumentModel):
     recipient = models.ForeignKey(Organisation, verbose_name='Получатель', related_name='+')
 
     # document author
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Автор', related_name='inc_created_by')
+    author = models.ForeignKey(base.AUTH_USER_MODEL, verbose_name='Автор', related_name='inc_created_by')
 
     def __str__(self):
         return 'Исх. #%s %s (%s)' % (self.identifier, self.subject, self.author)
@@ -109,7 +109,7 @@ class Incoming(DocumentModel):
     resolution = models.ForeignKey(Resolution, verbose_name='Резолюция')
 
     # user, who will be set resolution
-    resolution_author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Автор резюлюции', related_name='resolution_by')
+    resolution_author = models.ForeignKey(base.AUTH_USER_MODEL, verbose_name='Автор резюлюции', related_name='resolution_by')
 
     # date done
     completed_at = models.DateTimeField('Дата исполнения')
@@ -124,7 +124,7 @@ class Incoming(DocumentModel):
     sender = models.ForeignKey(Organisation, verbose_name='Отправитель')
 
     # document author
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Автор', related_name='out_created_by')
+    author = models.ForeignKey(base.AUTH_USER_MODEL, verbose_name='Автор', related_name='out_created_by')
 
     def __str__(self):
         return 'Вх. #%s %s (%s)' % (self.identifier, self.subject, self.author)

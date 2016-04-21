@@ -9,8 +9,8 @@ def index(request):
 
 
 def incoming(request):
-    incoming_documents = Incoming.objects.filter()[:15]
-    quantity = len(incoming_documents)
+    incoming_documents = Incoming.objects.filter()
+    quantity = incoming_documents.count()
     return render(request, 'documents/incoming.html', {'incoming': incoming_documents, 'quantity': quantity})
 
 
