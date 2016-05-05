@@ -1,0 +1,75 @@
+{% extends 'layouts/application.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Список резолюций{% endblock %}
+
+{% block content %}
+
+    <script defer src="{% static 'js/resolutions.js' %}"></script>
+
+    <div class="page-header">
+        <h1>Список доступных резолюций:</h1>
+    </div>
+    <p class="lead">
+        <span class="badge">{{ resolutions.count }}</span>
+        <a href="#" id="switch_resolution_form" class="resolution-form">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </p>
+
+    <!-- New resolution form -->
+    <div class="well" id="resolution_form">
+        <form method="POST" action="{% url 'create_resolution' %}" class="form-horizontal">
+            <fieldset>
+                <legend>Новая резолюция:</legend>
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <h4>Форма заполненна некорректно: </h4>
+                        {% for field in form %}
+                            {{ field.label|escape }}:
+                            {{ field.errors|escape }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="{{ form.title.id_for_label }}">
+                        {{ form.title.label }}:
+                    </label>
+                    {{ form.title }}
+                </div>
+                <button type="submit" class="save btn btn-success">Сохранить</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Наименование:</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resolution in resolutions %}
+            <tr>
+                <td>{{ resolution.id }}</td>
+                <td>{{ resolution.title }}</td>
+                <td>
+                    <a href="{% url 'delete_resolution' resolution_id=resolution.id %}" id="delete_resolution" data-confirm="true">
+                        <span class="glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+                <code>Резолюции ещё не добавленны!</code>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="#" id="resolution_form_control" class="btn btn-primary">Добавить резолюцию</a>
+
+{% endblock %}

@@ -19,11 +19,22 @@ class Organisation(models.Model):
     """
     Implement resolution catalog.
     """
+
+    TYPE_CHOISES = (
+        ('entity', 'Индивидуальный предприниматель'),
+        ('organisation', 'Организация'),
+        ('individual', 'Физическое лицо'),
+    )
+
     title = models.CharField(max_length=250, unique=True)
-    address = models.CharField(max_length=250)
-    phone_main = models.CharField(max_length=20)
-    phone_minor = models.CharField(max_length=20)
-    email = models.EmailField()
+    title_short = models.CharField(max_length=50, unique=True)
+    entity_type = models.CharField(max_length=50,choices=TYPE_CHOISES)
+    okpo = models.IntegerField('ОКПО', max_length=14)
+    inn = models.IntegerField('ИНН', max_length=10)
+    address = models.CharField('Адресс', max_length=250)
+    phone = models.CharField('Телефон', max_length=20)
+    mobile = models.CharField('Моб.', max_length=20)
+    email = models.EmailField('Электронная почта')
 
     class Meta:
         verbose_name = 'Организация'

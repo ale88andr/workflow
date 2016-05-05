@@ -1,0 +1,15 @@
+{% extends 'layouts/application.html' %}
+
+{% block title %}Исходящая корреспонденция{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Исходящие документы</h1>
+    </div>
+    <p class="lead">Здесь отражается вся исходящая корреспонденция предприятия:</p>
+    {% for document in incoming %}
+        <div></div>
+    {% empty %}
+        <code>В папке "Исходящие" ещё нет документов!</code>
+    {% endfor %}
+{% endblock %}
