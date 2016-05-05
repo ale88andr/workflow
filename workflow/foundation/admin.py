@@ -56,7 +56,7 @@ class UserAdmin(UserAdmin):
     ordering = ('firstname',)
     filter_horizontal = ()
 
-# Регистрация нашей модели
+# Регистрация модели
 admin.site.register(Employee, UserAdmin)
 admin.site.register([Department, Organisation])
 admin.site.unregister(Group)

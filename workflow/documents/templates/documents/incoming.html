@@ -1,0 +1,21 @@
+{% extends 'layouts/application.html' %}
+
+{% block title %}Входящая корреспонденция({{ quantity }}){% endblock %}
+
+{% block content %}
+    <div class="col-md-9">
+        <div class="page-header">
+            <h1>Входящие документы <span class="badge">{{ quantity }}</span></h1>
+        </div>
+        <p class="lead">Здесь отражается вся входящая корреспонденция предприятия:</p>
+        {% for document in incoming %}
+            <div></div>
+        {% empty %}
+            <code>В папке "Входящие" ещё нет документов!</code>
+        {% endfor %}
+    </div>
+    <div class="col-md-3 text-center">
+        <span class="text-muted">Вы вошли как:</span>
+        <br><span class="text-info">{{ user.get_full_name }}</span>
+    </div>
+{% endblock %}

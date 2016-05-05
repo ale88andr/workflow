@@ -1,0 +1,40 @@
+- model: workflow.resolution
+  pk: 1
+  fields:
+    title: Для работы
+- model: workflow.resolution
+  pk: 2
+  fields:
+    title: Для подшивки в дело
+- model: workflow.resolution
+  pk: 3
+  fields:
+    title: Для сведения
+- model: workflow.resolution
+  pk: 4
+  fields:
+    title: Для подготовки информации
+- model: workflow.resolution
+  pk: 5
+  fields:
+    title: Для исполнения в установленный срок
+- model: workflow.resolution
+  pk: 6
+  fields:
+    title: Для изучения и использования в работе
+- model: workflow.resolution
+  pk: 7
+  fields:
+    title: Для исполнения
+- model: workflow.resolution
+  pk: 8
+  fields:
+    title: Для ознакомления специалистов и применения в работе
+- model: workflow.resolution
+  pk: 9
+  fields:
+    title: Для постановки на учёт
+- model: workflow.resolution
+  pk: 10
+  fields:
+    title: Для руководства в работе

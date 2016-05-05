@@ -8,14 +8,12 @@ SECRET_KEY = '6171nkopa-!vda73kvz74o2phb*1cc^6=v9*-^1-k6ht-_uidj'
 
 ALLOWED_HOSTS = []
 
-DEBUG = True
-
-# Внешние библиотеки
+# Third-Party libraries
 EXTERNAL_APPS = [
 
 ]
 
-# Приложения
+# Projects applications
 PROJECT_APPS = [
     'foundation',
     'documents',
@@ -73,11 +71,11 @@ WSGI_APPLICATION = 'workflow.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
-LOGIN_URL = r"/login/"
+LOGIN_URL = r'/login/'
 
 AUTH_USER_MODEL = 'foundation.Employee'
 

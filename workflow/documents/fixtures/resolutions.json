@@ -1,0 +1,72 @@
+[
+  {
+    "model": "documents.resolution",
+    "pk": 1,
+    "fields": {
+      "title": "Для работы"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 2,
+    "fields": {
+      "title": "Для подшивки в дело"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 3,
+    "fields": {
+      "title": "Для сведения"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 4,
+    "fields": {
+      "title": "Для подготовки информации"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 5,
+    "fields": {
+      "title": "Для исполнения в установленный срок"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 6,
+    "fields": {
+      "title": "Для изучения и использования в работе"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 7,
+    "fields": {
+      "title": "Для исполнения"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 8,
+    "fields": {
+      "title": "Для ознакомления специалистов и применения в работе"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 9,
+    "fields": {
+      "title": "Для постановки на учёт"
+    }
+  },
+  {
+    "model": "documents.resolution",
+    "pk": 10,
+    "fields": {
+      "title": "Для руководства в работе"
+    }
+  }
+]
