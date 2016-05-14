@@ -1,0 +1,14 @@
+{% extends 'layouts/application.html' %}
+
+{% block title %}Предприятие{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Реквизиты предприятия:</h1>
+    </div>
+    {% if not enterprise %}
+        {% include 'foundation/enterprise/form.html' %}
+    {% else %}
+        <h1>Представление!</h1>
+    {% endif %}
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -8,11 +9,38 @@ class Department(models.Model):
     """
     Implement organisation department catalog.
     """
-    title = models.CharField(max_length=250, unique=True)
+    title = models.CharField('Наименование отдела', max_length=250, unique=True)
 
     class Meta:
         verbose_name = 'Отдел'
         verbose_name_plural = 'Отделы'
+
+
+class Enterprise(models.Model):
+    """
+    The Enterprise.
+    """
+    ENTERPRISE_TYPES = [
+        ['gov', 'Государственное учреждение'],
+    ]
+
+    BRANCH_TYPES = [
+        ['legal', 'С образованием юридического лица'],
+        ['illegal', 'Без образования юридического лица']
+    ]
+
+    title = models.CharField('Наименование ', max_length=150, unique=True)
+    short_title = models.CharField('Краткое наименование', max_length=75, unique=True)
+    enterprise_type = models.CharField('Организационная форма', choices=ENTERPRISE_TYPES, default='gov', max_length=20)
+    address_city = models.CharField('Город', max_length=50)
+    address_street = models.CharField('Улица', max_length=75)
+    address_index = models.IntegerField('Индекс')
+    phone = models.CharField('Контактный телефон', max_length=20)
+    fax = models.CharField('Факс', max_length=20)
+    ogrn = models.IntegerField('ОГРН', blank=True, null=True)
+    inn = models.IntegerField('ИНН', blank=True, null=True)
+    kpp = models.IntegerField('КПП', blank=True, null=True)
+    parent = models.ForeignKey('Enterprise', default=0)
 
 
 class Organisation(models.Model):
@@ -26,11 +54,23 @@ class Organisation(models.Model):
         ('individual', 'Физическое лицо'),
     )
 
-    title = models.CharField(max_length=250, unique=True)
-    title_short = models.CharField(max_length=50, unique=True)
-    entity_type = models.CharField(max_length=50,choices=TYPE_CHOISES)
-    okpo = models.IntegerField('ОКПО', max_length=14)
-    inn = models.IntegerField('ИНН', max_length=10)
+    entity_type = models.CharField('Форма', max_length=50, choices=TYPE_CHOISES, default=TYPE_CHOISES[0][0])
+    title = models.CharField('Наименование', max_length=250, unique=True)
+    title_short = models.CharField('Краткое наименование', max_length=50, unique=True)
+
+    # ip
+    ip_firstname = models.CharField('Фамилия', max_length=50)
+    ip_lastname = models.CharField('Имя', max_length=50)
+    ip_middlename = models.CharField('Отчество', max_length=50)
+    snils = models.CharField('СНИЛС', max_length=14)
+    date_of_birth = models.DateField('Дата рождения', default=None)
+
+    # org
+    okpo = models.IntegerField('ОКПО', max_length=14, blank=True, null=True)
+    inn = models.IntegerField('ИНН', max_length=10, blank=True, null=True)
+    kpp = models.IntegerField('КПП', blank=True, null=True)
+    gni = models.IntegerField('Код ГНИ', blank=True, null=True)
+
     address = models.CharField('Адресс', max_length=250)
     phone = models.CharField('Телефон', max_length=20)
     mobile = models.CharField('Моб.', max_length=20)
