@@ -29,14 +29,15 @@ def delete_resolution(request, resolution_id):
     return redirect('documents.views.resolutions')
 
 
-def create_resolution(request):
-    if request.method == "POST":
-        form = ResolutionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('documents.views.resolutions')
-        else:
-            return get_resolutions(request, form)
+# TODO! Remove
+# def create_resolution(request):
+#     if request.method == "POST":
+#         form = ResolutionForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('documents.views.resolutions')
+#         else:
+#             return get_resolutions(request, form)
 
 
 def get_resolutions(request, form = None):

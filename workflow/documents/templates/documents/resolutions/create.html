@@ -1,0 +1,26 @@
+<!-- New resolution form -->
+<div class="well" id="resolution_form">
+    <form method="POST" action="" class="form-horizontal">
+        <fieldset>
+            <legend>Новая резолюция:</legend>
+            {% csrf_token %}
+            {% if create_form.errors %}
+             <div class="alert alert-dismissible alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <h4>Форма заполненна некорректно: </h4>
+                  {% for field in create_form %}
+                    {{ field.label|escape }}:
+                    {{ field.errors|escape }}
+                  {% endfor %}
+              </div>
+            {% endif %}
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="{{ create_form.title.id_for_label }}">
+                    {{ create_form.title.label }}:
+                </label>
+                {{ create_form.title }}
+            </div>
+            <button type="submit" class="save btn btn-success">Сохранить</button>
+        </fieldset>
+    </form>
+</div>

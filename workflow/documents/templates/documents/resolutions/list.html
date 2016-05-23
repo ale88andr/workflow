@@ -1,0 +1,58 @@
+{% extends 'layouts/application.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Список резолюций{% endblock %}
+
+{% block content %}
+
+    <script defer src="{% static 'js/resolutions.js' %}"></script>
+
+    <div class="page-header">
+        <h1>Список доступных резолюций:</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+            <p class="lead">
+                <span class="badge">{{ resolutions.count }}</span>
+                <a href="#" id="switch_resolution_form" class="resolution-form">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
+            {% include 'documents/resolutions/search.html' %}
+        </div>
+    </div>
+
+    {% include 'documents/resolutions/create.html' %}
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Наименование:</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resolution in resolutions %}
+            <tr>
+                <td>{{ resolution.id }}</td>
+                <td>{{ resolution.title }}</td>
+                <td>
+                    <a href="{% url 'delete_resolution' pk=resolution.id %}" id="delete_resolution" data-confirm="true">
+                        <span class="glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+                <code>Резолюции ещё не добавленны!</code>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="#" id="resolution_form_control" class="btn btn-primary">Добавить резолюцию</a>
+
+{% endblock %}

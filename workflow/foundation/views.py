@@ -18,7 +18,10 @@ def enterprise(request, form=None):
     return render(
         request,
         'foundation/enterprise/enterprise.html',
-        {'enterprise': enterprise_obj, 'form': form}
+        {
+            'enterprise': enterprise_obj,
+            'form': form
+        }
     )
 
 
@@ -29,6 +32,16 @@ def create_main_enterprise(request):
             main_enterprise = form.save(commit=False)
             main_enterprise.id = 0
             main_enterprise.save()
+            return redirect('foundation.views.enterprise')
+        else:
+            return enterprise(request, form)
+
+
+def create_enterprise_branch(request):
+    if request.POST:
+        form = BranchEnterpriseForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('foundation.views.enterprise')
         else:
             return enterprise(request, form)

@@ -1,0 +1,9 @@
+<!-- Search form -->
+<div class="pull-right" id="search_form">
+    <form method="GET" action="" class="form-inline">
+        {% for field in search_form %}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" class="save btn btn-sm btn-success" value="Найти">
+    </form>
+</div>

@@ -1,0 +1,14 @@
+<form action="">
+    {{ form }}
+    <input type="submit">
+</form>
+<form action="" method="post">{% csrf_token %}
+    {{ new_question_form }}
+    <input type="submit">
+</form>
+
+{% for question in object_list %}
+    {{ question.title }}
+     |
+    {{ question.created_at }} <br>
+{% endfor %}

@@ -1,0 +1,17 @@
+<!-- New enterprise form -->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <span class="text-warning">
+            Перед началом работы системы необходимо заполнить базовые реквизиты головного предприятия
+        </span>
+    </div>
+</div>
+<div class="well col-lg-6 col-lg-offset-3" id="enterprise_form">
+    <form method="POST" action="{% url 'enterprise_install' %}" class="form-horizontal">
+        <fieldset>
+            <legend>Создание предприятия:</legend>
+                {% include 'foundation/enterprise/v2/form.html' %}
+            <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+        </fieldset>
+    </form>
+</div>

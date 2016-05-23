@@ -1,0 +1,18 @@
+<!--Common form template for enterprise model-->
+<!--TODO! Create 'has error' class on error fields-->
+{% csrf_token %}
+{% for field in form %}
+    <div class="form-group">
+        <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="{{ field.id_for_label }}">
+            {% if field.field.required %}<span class="text-warning">*&nbsp</span>{% endif %}
+            {{ field.label_tag }}
+        </label>
+        <div class="col-lg-8 col-md-8 col-sm-8 {% if field.errors %} has-error {% endif %}">
+            {{ field }}
+            <p class="text-danger">{{ field.errors|striptags }}</p>
+            {% if field.help_text %}
+                <p class="help-text">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

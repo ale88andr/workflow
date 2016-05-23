@@ -11,10 +11,10 @@
     <div class="page-header">
         <h2 class="text-primary">Реквизиты предприятия:</h2>
     </div>
-    {% if not enterprise %}
-        {% include 'foundation/enterprise/new.html' %}
+    {% if not head_enterprise %}
+        {% include 'foundation/enterprise/v2/new.html' %}
     {% else %}
-        {% include 'foundation/enterprise/repr.html' %}
-        {% include 'foundation/enterprise/branch.html' %}
+        <!--{% include 'foundation/enterprise/v2/repr.html' %}-->
+        <!--{% include 'foundation/enterprise/v2/branch.html' %}-->
     {% endif %}
 {% endblock %}

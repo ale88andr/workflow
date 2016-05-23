@@ -43,6 +43,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages"
+)
+
 ROOT_URLCONF = 'workflow.urls'
 
 TEMPLATES = [

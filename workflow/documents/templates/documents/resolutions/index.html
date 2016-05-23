@@ -20,7 +20,7 @@
 
     <!-- New resolution form -->
     <div class="well" id="resolution_form">
-        <form method="POST" action="{% url 'create_resolution' %}" class="form-horizontal">
+        <form method="POST" action="" class="form-horizontal">
             <fieldset>
                 <legend>Новая резолюция:</legend>
                 {% csrf_token %}
@@ -59,7 +59,7 @@
                 <td>{{ resolution.id }}</td>
                 <td>{{ resolution.title }}</td>
                 <td>
-                    <a href="{% url 'delete_resolution' resolution_id=resolution.id %}" id="delete_resolution" data-confirm="true">
+                    <a href="{% url 'delete_resolution' resolution.id %}" id="delete_resolution" data-confirm="true">
                         <span class="glyphicon-trash"></span>
                     </a>
                 </td>

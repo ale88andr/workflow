@@ -1,0 +1,47 @@
+[
+  {
+    "model": "stackoverflow.question",
+    "pk": 1,
+    "fields": {
+      "title": "Джанго Освобождённый",
+      "text": "Почему фильм назвали - Джанго",
+      "created_at": "2001-01-01 00:00:00"
+    }
+  },
+  {
+    "model": "stackoverflow.question",
+    "pk": 2,
+    "fields": {
+      "title": "You are not alone",
+      "text": "Why? You are not alone",
+      "created_at": "2001-01-01 00:00:00"
+    }
+  },
+  {
+    "model": "stackoverflow.question",
+    "pk": 3,
+    "fields": {
+      "title": "Space",
+      "text": "Is space is infinite",
+      "created_at": "2001-01-01 00:00:00"
+    }
+  },
+  {
+    "model": "stackoverflow.question",
+    "pk": 4,
+    "fields": {
+      "title": "Who we are",
+      "text": "Who we are?",
+      "created_at": "2001-01-01 00:00:00"
+    }
+  },
+  {
+    "model": "stackoverflow.question",
+    "pk": 5,
+    "fields": {
+      "title": "Just do it!",
+      "text": "Do it, do ...",
+      "created_at": "2001-01-01 00:00:00"
+    }
+  }
+]

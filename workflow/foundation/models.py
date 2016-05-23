@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
-from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -22,6 +21,15 @@ class Enterprise(models.Model):
     """
     ENTERPRISE_TYPES = [
         ['gov', 'Государственное учреждение'],
+        ['ft', 'Полное товарищество'],
+        ['ooo', 'Общество с ограниченной ответственностью'],
+        ['odo', 'Общество с дополнительной ответственностью'],
+        ['oao', 'Открытое акционерное общество'],
+        ['zao', 'Закрытое акционерное общество'],
+        ['pk', 'Производственный кооператив'],
+        ['up', 'Унитарное предприятие'],
+        ['ip', 'Индивидуальный предприниматель'],
+        ['pt', 'Простое товарищество'],
     ]
 
     BRANCH_TYPES = [
@@ -31,7 +39,7 @@ class Enterprise(models.Model):
 
     title = models.CharField('Наименование ', max_length=150, unique=True)
     short_title = models.CharField('Краткое наименование', max_length=75, unique=True)
-    enterprise_type = models.CharField('Организационная форма', choices=ENTERPRISE_TYPES, default='gov', max_length=20)
+    enterprise_type = models.CharField('Организационная форма', max_length=10)
     address_city = models.CharField('Город', max_length=50)
     address_street = models.CharField('Улица', max_length=75)
     address_index = models.IntegerField('Индекс')
@@ -42,17 +50,31 @@ class Enterprise(models.Model):
     kpp = models.IntegerField('КПП', blank=True, null=True)
     parent = models.ForeignKey('Enterprise', default=0)
 
+    @property
+    def address(self):
+        return "г. {:s}, {:d}, {:s}".format(
+            self.address_city,
+            self.address_index,
+            self.address_street
+        )
+
+    @staticmethod
+    def get_head_enterprise():
+        return Enterprise.objects.filter(pk=0) or None
+
+    def __str__(self):
+        return self.short_title
+
 
 class Organisation(models.Model):
     """
     Implement resolution catalog.
     """
-
-    TYPE_CHOISES = (
-        ('entity', 'Индивидуальный предприниматель'),
-        ('organisation', 'Организация'),
-        ('individual', 'Физическое лицо'),
-    )
+    TYPE_CHOISES = [
+        ['entity', 'Индивидуальный предприниматель'],
+        ['organisation', 'Организация'],
+        ['individual', 'Физическое лицо'],
+    ]
 
     entity_type = models.CharField('Форма', max_length=50, choices=TYPE_CHOISES, default=TYPE_CHOISES[0][0])
     title = models.CharField('Наименование', max_length=250, unique=True)
