@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model
-from .models import Enterprise
+import re
+from .models import Enterprise, Department
 
 
 class UserCreationForm(forms.ModelForm):
@@ -67,7 +68,15 @@ class LoginForm(forms.Form):
     password = forms.CharField()
 
 
+"""
+Enterprise forms
+"""
+
+
 class EnterpriseForm(forms.ModelForm):
+    """
+    Abstract class for base enterprise form
+    """
 
     class Meta:
         abstract = True
@@ -139,6 +148,7 @@ class EnterpriseForm(forms.ModelForm):
         ogrn = str(self.cleaned_data.get('ogrn'))
 
         if len(ogrn) != 13:
+            print(len(ogrn))
             raise forms.ValidationError('ОГРН должен содержать 13 цифр')
 
         return ogrn
@@ -184,8 +194,37 @@ class BranchEnterpriseForm(EnterpriseForm):
         queryset=Enterprise.objects.all(),
         empty_label=None,
         widget=forms.Select(attrs={'class': 'form-control'}),
+        help_text='Укажите головную организацию'
     )
 
     class Meta:
         model = Enterprise
         fields = '__all__'
+
+
+"""
+Departments module forms
+"""
+
+
+class DepartmentForm(forms.ModelForm):
+    title = forms.CharField(
+        label='Наименование подразделения',
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'id': 'title', 'required': True, 'placeholder': 'Введите наименование...'}
+        ),
+        required=True,
+    )
+
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+
+        if not re.compile("^(\w+)$").match(title):
+            raise forms.ValidationError('Наименование подразделение не должно содержать спецсимволов')
+
+        return title
+
+    class Meta:
+        model = Department
+        fields = ['title', ]

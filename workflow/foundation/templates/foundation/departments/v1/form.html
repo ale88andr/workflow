@@ -1,0 +1,23 @@
+{% if view.form %}
+    <div class="well">
+        <form id="dept-form" action="{% url 'depts' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Создание подразделения</legend>
+                {% for field in view.form %}
+                <div class="form-group" id="{{ field.id_for_label }}-wrapper">
+                    <label for="{{ field.id_for_label }}" class="control-label">
+                        {{ field.label }}:
+                    </label>
+                    {{ field }}
+                    <div id="error-{{ field.id_for_label }}" class="text-danger"></div>
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <button type="reset" class="btn btn-default">Отменить</button>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endif %}

@@ -1,0 +1,26 @@
+{% extends 'layouts/application.html' %}
+
+{% block title %}{{ view.title }}{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+    <script defer src="{% static 'js/helpers/form.js' %}"></script>
+    <script defer src="{% static 'js/departments/create.js' %}"></script>
+    <script defer src="{% static 'js/departments/list.js' %}"></script>
+
+    <h2 class="text-primary">{{ view.title }}</h2>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" id="dep-list">
+            {% include 'foundation/departments/v1/list.html' %}
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            {% include 'foundation/departments/v1/form.html' %}
+        </div>
+    </div>
+
+{% endblock %}

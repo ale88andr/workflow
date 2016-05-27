@@ -1,10 +1,14 @@
+import json
+
 from django.contrib import messages
+from django.core import serializers
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.middleware import http
 from django.views.generic import CreateView, TemplateView
 
-from .forms import MainEnterpriseForm
-from .models import Enterprise
+from .forms import MainEnterpriseForm, BranchEnterpriseForm, DepartmentForm
+from .models import Enterprise, Department
 
 
 class HeadEnterpriseInstall(CreateView):
@@ -26,7 +30,7 @@ class HeadEnterpriseInstall(CreateView):
         return super(HeadEnterpriseInstall, self).form_invalid(form)
 
     def get_success_url(self):
-        return reverse('View:Enterprise')
+        return reverse('enterprise')
 
 
 class EnterpriseView(TemplateView):
@@ -37,7 +41,46 @@ class EnterpriseView(TemplateView):
         head_enterprise = Enterprise.get_head_enterprise()
 
         if head_enterprise is None:
-            context['head_enterprise'] = head_enterprise
             context['form'] = MainEnterpriseForm()
+        else:
+            context['head_enterprise'] = head_enterprise
+            context['form'] = BranchEnterpriseForm()
 
         return context
+
+
+class DepartmentsController(TemplateView):
+    template_name = 'foundation/departments/v1/depts.html'
+    title = 'Отделы организации'
+
+    def post(self, request):
+        form = DepartmentForm(request.POST)
+        response_data = {}
+
+        if form.is_valid():
+            form.instance.title = form.instance.title.capitalize()
+            form.save()
+            response_data['success'] = 'Подразделение "%s" созданно!' % form.instance.title
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+            return HttpResponse(
+                json.dumps({"errors": form.errors}),
+                content_type="application/json",
+                status=400
+            )
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            departments = serializers.serialize('json', self.departments())
+            return JsonResponse(departments, safe=False)
+        else:
+            return super(DepartmentsController,self).get(self,request,*args,**kwargs)
+
+    def departments(self):
+        return Department.objects.all()
+
+    def form(self):
+        return DepartmentForm()

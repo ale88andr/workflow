@@ -3,6 +3,10 @@ from .models import Resolution
 
 import re
 
+"""
+Resolutions module forms
+"""
+
 
 class ResolutionForm(forms.ModelForm):
     title = forms.CharField(label='Текст резолюции', max_length=250)

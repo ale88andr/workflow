@@ -19,6 +19,7 @@ class Enterprise(models.Model):
     """
     The Enterprise.
     """
+
     ENTERPRISE_TYPES = [
         ['gov', 'Государственное учреждение'],
         ['ft', 'Полное товарищество'],
@@ -60,7 +61,7 @@ class Enterprise(models.Model):
 
     @staticmethod
     def get_head_enterprise():
-        return Enterprise.objects.filter(pk=0) or None
+        return Enterprise.objects.get(id=0) or None
 
     def __str__(self):
         return self.short_title
