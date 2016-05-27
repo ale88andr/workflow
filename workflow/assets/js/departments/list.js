@@ -5,7 +5,10 @@ $(document).ready(function() {
 
 function dumpList(data) {
     $.each(data, function (key, item){
-        var html_code = "<div id='" + item.model + "-" + item.pk +"'>" + item.fields.title + "</div>";
+        var html_code = "<div id='" + item.model + "-" + item.pk +"' class='list-item list-item-new psbutton'>" +
+            "<div class='creation-text'><span class='fa'>" + item.fields.title +
+            "</span><form action='' method='DELETE'><input type='hidden' value='" + item.pk +
+            "'><input type='submit' value='×'></form></div></div>";
         $('#departments-list').append(html_code)
     });
 }

@@ -13,3 +13,45 @@
     font-style: italic;
     color: #999999;
 }
+
+.items {
+    margin: -10px 0 0 -10px;
+}
+
+.items .list-item.list-item-new {
+    border: 1px dashed #aaa;
+}
+
+.items .list-item {
+    width: 120px;
+    min-height: 90px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 0 0 10px;
+    padding: 5px 5px;
+    border-radius: 1px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.items .list-item .creation-text {
+    color: #666;
+    left: 5%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(0px, -50%);
+    width: 90%;
+}
+
+.items .list-item .creation-text .fa {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.items .list-item:hover {
+    background: #e5f3fb;
+    border-color: #70c0e7;
+}

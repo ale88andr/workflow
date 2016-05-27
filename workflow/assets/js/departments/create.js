@@ -1,10 +1,18 @@
+// form helper
 var fh = new FormHelper('dept-form');
+// dept form selector
+var form = $('#dept-form');
 
 // Bind create dept even
-$('#dept-form').on('submit', function(event){
+form.on('submit', function(event){
     event.preventDefault();
     fh.clean();
     create_dept();
+});
+
+// Bind create dept even
+form.on('reset', function(event){
+    fh.clean();
 });
 
 // AJAX for department create
